@@ -589,7 +589,7 @@ check_update_from_net() {
     ;;
   "nezha-dashboard")
     local current_version=$(./nezha-dashboard -v)
-    if ! check_from_github "naiba" "nezha" "$current_version"; then
+    if ! check_from_github "frankiejun" "freebsd-nezha" "$current_version"; then
       echo "未发现新版本!"
       return 1
     fi
@@ -635,9 +635,6 @@ download_from_github_release() {
   *.zip)
     unzip -o "$zippackage" -d .
     ;;
-  *.gz)
-    gzip -d "$zippackage"
-    ;;
   *.tar.gz | *.tgz)
     tar -xzf "$zippackage"
     ;;
@@ -646,6 +643,9 @@ download_from_github_release() {
     ;;
   *.tar.xz | *.txz)
     tar -xJf "$zippackage"
+    ;;
+  *.gz)
+    gzip -d "$zippackage"
     ;;
   *.tar)
     tar -xf "$zippackage"
